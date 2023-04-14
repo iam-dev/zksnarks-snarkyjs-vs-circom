@@ -1,0 +1,7 @@
+node_modules
+input.json
+
+.env
+coverage
+coverage.json
+typechain

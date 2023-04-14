@@ -1,0 +1,37 @@
+{
+  "name": "zksnarks-snarkyjs-vs-circom",
+  "version": "1.0.0",
+  "description": "In this tutorial I'm going to show you the implementation differences between zk-SNARK Snarkyjs versus Solidity zk-SNARK  using Circom, Snarkjs & Solidity.",
+  "dependencies": {
+    "circomlib": "^2.0.5"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@typechain/ethers-v5": "^10.2.0",
+    "@typechain/hardhat": "^6.1.5",
+    "@types/chai": "^4.3.4",
+    "@types/jest": "^29.5.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.15.11",
+    "chai": "^4.3.7",
+    "circom_tester": "^0.0.11",
+    "circomlib": "^2.0.3",
+    "circomlibjs": "^0.1.2",
+    "fs": "^0.0.1-security",
+    "hardhat": "^2.13.1",
+    "hardhat-gas-reporter": "^1.0.9",
+    "snarkjs": "^0.6.10",
+    "ts-node": "^10.9.1",
+    "typechain": "^8.1.1",
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "compile:circuit": "circom ./circom-snarkjs-solidity/PoseidonHash.circom --r1cs --wasm --sym --c -o ./circom-snarkjs-solidity/compiled",
+    "test": "npx hardhat test"
+  },
+  "author": "IaM <DEV>",
+  "license": "MIT"
+}

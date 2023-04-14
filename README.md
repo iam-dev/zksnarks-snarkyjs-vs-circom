@@ -1,21 +1,18 @@
-# zk-SNARK Snarkyjs versus "Circom, Snarkjs & Solidity"
+# Comparing zk-SNARK Snarkyjs with "Circom, Snarkjs & Solidity"
 
-In this tutorial I'm going to show you the implementation differences between zk-SNARK Snarkyjs versus Solidity zk-SNARK  using Circom, Snarkjs & Solidity.
+In this tutorial, we will explore the implementation differences between zk-SNARKs in SnarkyJS and Solidity using Circom, SnarkJS, and Solidity.
+
 
 ## What is snarkyjs
 SnarkyJS is a TypeScript library that makes it easy for developers to build powerful ZK applications without being cryptographers. Smart contracts written with SnarkyJS run in a user's web browser retaining privacy for the user's data inputs.
 
 ## What is Circom
-Circom is a programming language to write programs (called circuits) that take a set of inputs, and describe constraints about them, as well as having one, many or no outputs.
+Circom is a programming language used to write programs called "circuits". These circuits take a set of inputs, describe constraints about them, and can have one, many, or no outputs.
 
 ## Tutorial Use Case
-Let's say we have a key that shouldn't be revealed to anyone, but the possesion of the key is very important. It could be a privateKey that associated to a private key or a symetric key for encrypting a file.
+Let's say we have a private key that should not be revealed to anyone, but its possession is vital. It could be a private key associated with an account or a symmetric key used to encrypt a file. We want to prove that we know the key without revealing it, using zero-knowledge proof (ZKP) zk-SNARKs. Specifically, we will use the Poseidon hash function.
 
-We want to be able to show to everyone that we know this the key without revealing the actual key using zero knowledge proof zk-SNARKS. Proof x from H(x)
-
-In this tutorial we are going to use Poseidon hash.
-
-Poseidon is a hash function designed to minimize prover and verifier complexities when zero-knowledge proofs are generated and validated. Compared to competitor hash functions, such as Pedersen Hash, Poseidon uses up to 8x fewer constraints per message bit, which means that it is significantly faster.
+Poseidon is a hash function designed to minimize the complexities for both the prover and verifier when generating and validating zero-knowledge proofs. Compared to competitor hash functions, such as Pedersen Hash, Poseidon uses up to 8x fewer constraints per message bit, making it significantly faster.
 
 ## Installing the circom ecosystem
 see also [Installing the circom ecosystem docs](https://docs.circom.io/getting-started/installation/)
@@ -81,13 +78,9 @@ npm install -g snarkjs
 
 
 ### **Step 1. Writing our  Circuit**
-Create a package.json:
+We will create a new directory called circom-snarkjs-solidity. Within this directory, we will create a package.json file and add the circomlib package as a dev dependency:
 ```
 npm init
-```
-
-Add circomlib:
-```
 npm install --save-dev circomlib
 ```
 or
@@ -149,6 +142,9 @@ template PoseidonHash() {
 ```
 
 ### **Step 2. Compiling our circuit**
+Now that we have written our circuit, the next step is to compile it using Circom. This will generate a JavaScript file that we can use to generate a proof using SnarkJS.
+
+To compile the circuit, we can run the following command:
 ```
 mkdir ./circom-snarkjs-solidity/compiled
 circom ./circom-snarkjs-solidity/PoseidonHash.circom --r1cs --wasm --sym --c -o ./circom-snarkjs-solidity/compiled
@@ -372,3 +368,11 @@ export class Add extends SmartContract {
 npm run build
 npm run test
 ```
+
+
+# Conclusion
+To conclude, in this tutorial we have explored the differences between using zk-SNARKs with SnarkyJS versus using Circom, SnarkJS, and Solidity. We have shown how to use Poseidon hash in a circuit written in Circom, and how to compile and generate the verification code for the circuit using SnarkJS. We have also seen how to use Solidity to interact with the generated verification code and deploy a smart contract on the Ethereum blockchain.
+
+Circom provides a convenient way to write and verify arithmetic circuits for use in ZKP systems. It simplifies the process of building ZKP systems and helps to ensure their correctness and security. SnarkJS provides the tools needed to compile and generate the verification code for the circuit, which can then be used with Solidity to deploy a smart contract on the blockchain.
+
+Overall, the choice between using SnarkyJS and Circom, SnarkJS, and Solidity depends on the specific requirements of the application. Developers may prefer SnarkyJS for its ease of use and compatibility with TypeScript, while others may prefer the flexibility and performance of using Circom, SnarkJS, and Solidity.
